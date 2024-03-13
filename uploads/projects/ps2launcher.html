@@ -1,0 +1,38 @@
+<head>
+    <link rel="stylesheet" href="/./styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<body>
+    <div class="header">
+        <a href = "/./projects.html" class="header-element"> Personal Projects </a>
+        <a href = "/./gamedev.html" class="header-element"> GameDev Journey </a>
+        <a href = "/./glitchhunting.html" class="header-element"> Glitch Hunting </a>
+        <a href = "/./index.html" class="header-element"> Home </a>
+        <a href = "/./about.html" class="header-element"> About </a>
+        <a href = "/./contact.html" class="header-element"> Contact </a>
+        <a href = "/./events.html" class="header-element"> Events </a>
+        <a href = "/./gaming.html" class="header-element"> Gaming Analysis </a>
+    </div>
+    <h2>Okage PS4 Emulator Compatibility + PS2 Network Game Launcher</h2>
+    <hr>
+    <p align="justify">A PS4/PS5 exploit called Mast1c0re was discovered in 2022, it allows these systems to play other PS2 by sending their ISO images through USB/Network. It affects all firmware versions and is essentialy unpatchable, the 
+    only way Sony can "patch it" is by removing the game OKAGE:Shadow King from the PlayStation Store, as the exploit relies on this game.
+    <p align="justify">The concept of the glitch is that by extended the player's name, it is possible to create a stack buffer overflow, thus allowing to custom code execution.
+    It is necessary to have a save modified with the application on the console that will be triggered when the game loads your save. After the exploit is triggered, you are asked
+    to send the ISO to the console through your PC. For this you use a Python script, type IP of your console followed by the name of the ISO, simple as that.
+    <p align="justify">Unfortunately, this exploit has bad compatibility with a lot of PS2 games, leading them to crash as soon as they are transferred or they are unplayable (because graphics are glitched or the game crashes when you perform an action that is necessary to play the game).
+    <p align="justify">Even with its bad compatibility, I wanted to test out as many PS2 games as possible. I like the fact of playing PS2 games on PS4, Sony should provide a larger library so that this is not the only way
+    to play these old games on newer hardware (with latest firmware).
+    <p align="justify">In order to make testing games easier, I developed a web application that lets me run the python script on the PC. The application get all the ISOs in the folder automatically
+    shows their cover art (retrieved from <a href="https://github.com/xlenore/ps2-covers">xlenore's repository</a>) and when the user clicks on the cover of the wanted game, the command python script is triggered and the ISO is sent.
+    The real challenge was to make this web application work inside the PS4's browser, as it does not support many modern web features and has horrible performance.
+    After trying several alternatives to host a local page that the PS2 can access, the only thing that work was hosting a Jupyter Notebook and make an interface for it using Voila extension.
+    The notebook looks at the root folder, search for ISO files, open them to search for the game ID (e.g SLUS-97392 = Shinobi), stores this ID and formats the python command needed to send the ISO.
+    Retrieves game's covers based on their ISO ID through xlernore's repository, then it associates said python command to its respective cover and executes it everytime the user clicks on it.
+    The final product was pretty much what I wanted, you can bookmark the page on PS4's browser for easy access and use it to play your PS2 library without typing any instruction on PC.
+    All covers are resized automatically to have the same. Each row can hold up to 4 PS2 covers.
+    <figure><img src="/uploads/projects/ps2launcher/ps2networklauncher.png" class="center"><figcaption>Covers are update as you add games to the folder.</figcaption></figure>
+    
+</body>
+</head>

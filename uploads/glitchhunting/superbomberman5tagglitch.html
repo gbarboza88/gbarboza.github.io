@@ -1,0 +1,44 @@
+<head>
+    <link rel="stylesheet" href="/./styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<body>
+    <div class="header">
+        <a href = "/./projects.html" class="header-element"> Personal Projects </a>
+        <a href = "/./gamedev.html" class="header-element"> GameDev Journey </a>
+        <a href = "/./glitchhunting.html" class="header-element"> Glitch Hunting </a>
+        <a href = "/./index.html" class="header-element"> Home </a>
+        <a href = "/./about.html" class="header-element"> About </a>
+        <a href = "/./contact.html" class="header-element"> Contact </a>
+        <a href = "/./events.html" class="header-element"> Events </a>
+        <a href = "/./gaming.html" class="header-element"> Gaming Analysis </a>
+    </div>
+    <h1>Super Bomberman 5 and Port Priority</h1>
+    <hr>
+    <p align="justify">
+        History behind the glitch:<br>
+        <p align="justify">
+        When I was kid, there was one day that me and my three cousins were playing Super Bomberman 5 for the Super Famicom and a weird glitch happened.
+        We used to play Tag Team mode (2v2) with a mechanic called "Revenge Cart" turned on. This mechanic basically allowed a player to have a second chance of returning to the battlefield by putting its character on top of a cart that could move around the corner of the stage. While on top of your cart, you could throw bombs in the players that were still alive and, if you manage to get a kill, you would respawn. The glitch happened because of that mechanic.</p>
+        <p align="justify">I was on top of the missile while my duo was fighting in the battlefield. Same situation for the other team, one player downed (on top of the cart) and the other one on the battlefield. So basically, one player of each team on the battlefield and one player of each team on cart. My teammate ended up dying to a bomb of the cart player of the other team (leading to this player respawing), but while my teammate was in the animation frames of dying, I managed to score a kill on the oponnent that was on the battlefield, so I respawned too.</p>
+        <p align="justify">The expected behaviour in a situation like this one is for the game to simply keep things going, one player of each team is alive and only one can be the winner, but what happened is that both me and my opponent triggered the animation victory but my team was the one that received the trophy in the end (thankfully).</p>
+        <p align="justify">I remembered this situation recently and now a days, with more knowledge and tools that help testing out those situations, I tried to recreate the glitch and take a better look at it.
+        </p>Methodology:<p align="justify">
+        I recreated the situation using Mesen emulator and the feature Frame Advance, allowing me to make precise inputs the frame I want and advance frame-by-frame to see the results.In order to decide the teams, Super Bomberman 5 shows two rows for you to organize which players belong to which team. We will call the top row Team A and the bottom one Team B.</p>
+        <figure><img src="/uploads/glitchhunting/superbomberman5/tagteamselect.png" class="center"><figcaption>Team A vs Team B. X is player 5 turned off.</figcaption></figure>
+        <p align="justify">Results and Conclusion:<br><br>
+        No matter which team got the kill first from the missile, the trophy always goes to Team B. A bomb thrown from the missile takes about ~15 frames to hit the ground and become active, once active, it always explodes after a certain time (time is always the same). Bomb explosion hitbox activates frame 4 (independent of its range) and after it hits a character, it will only trigger the invincibility frames of the oponnent's winning animation after 35 frames.</p>
+        <p align="justify">If both players from the cart throw a bomb at the exact same frame and get a kill from the only person alive from the opposite team, they are going to respawn 47 frames after the kill and the game won't glitch. One frame earlier or late and the glitch happens, caused by the window before the invencibility frames of the players are triggered.</p>
+        <p align="justify">I tried then to switch teams: Bomberman and Dave Bomber (Red Guy) are Team A, Bomber Woof and Gary Bomber (Blue Guy) are Team B. Used the same method and then..., trophy went to Team A. Now things changed, and for worse. 
+        . Is it a character specific thing? If it is I will need to test all characters and see which one is better than the other? That is going to be a lot of work but I am determined to discover why this glitch happens.</p>
+        <p align="justify">After several tests among the cast, I thought I got. It seemed that it was character specific, after testing several different characters combinations things started to
+        follow a certain path and when I thought I figured it out, at the last test, the result breaks pattern that was being build and throw all the results of my tests in the trash.</p>
+        <p align="justify">Then I thought about port priority, there were other games I saw that behaved differently depending on the port the player used (Smash Bros Melee is an example), so I thought it was worth a try.
+        I kept testing for a couple of hours and that seems to be the issue, the game prioritizes ports in the following order: Port 4 > Port 3 > Port 2 > Port 1. So, if player a team is composed by player 3 and player 4, they will always have advantage when one of them respawns from the cart (even if their duo died some frames prior to the respawn). The priority applies for the player that gets the kill.
+        <p align="justify">This situation is unlikely but it led to a really good moment when it happened while I was playing. I will certainly take a look at the other games of this franchise and seek for other glitches on them.</p>
+        </p>
+        </p>
+    </p>
+</body>
+</head>
